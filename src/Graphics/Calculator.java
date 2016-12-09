@@ -1,6 +1,8 @@
 package Graphics;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Calculator {
+public class Calculator implements ActionListener {
 	JFrame calculator = new JFrame();
 	JPanel calc = new JPanel();
 	JButton add = new JButton();
@@ -32,14 +34,38 @@ void showCalculator(){
 	calc.add(mul);
 	calc.add(y);
 	calc.add(ans);
-	add.setText("addition");
-	sub.setText("subtract");
-	mul.setText("multiply");
+	add.setText("Addition");
+	sub.setText("Subtract");
+	mul.setText("Multiply");
 	div.setText("divide");
 	calculator.setVisible(true);
 	calculator.setSize(500, 150);
 	x.setPreferredSize(new Dimension(50,25));
 	y.setPreferredSize(new Dimension(50,25));
+	add.addActionListener(this);
+	sub.addActionListener(this);
+	div.addActionListener(this);
+	mul.addActionListener(this);
+}
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	if(e.getSource()==add){
+		String a = x.getText();
+		String b = y.getText();
+		int c =Integer.parseInt(b);
+		int d = Integer.parseInt(a);
+		int f = c + d;
+	}
+	else if(e.getSource()==sub){
+		
+	}
+	else if(e.getSource()==div){
+	
+}
+	else if(e.getSource()==mul){
+	
+}
 }
 }
 
