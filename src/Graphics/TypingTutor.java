@@ -57,7 +57,7 @@ public class TypingTutor implements KeyListener {
 			
 		}
 		if(Count>=10){
-			System.out.println(Count);
+			showTypingSpeed(Count);
 		}
 	}
 	public void keyReleased(KeyEvent e) {
