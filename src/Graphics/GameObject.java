@@ -7,9 +7,11 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
+	int speed;
+	boolean isAlive;
 
 	public GameObject() {
-
+		isAlive = true;
 	}
 
 	public void update() {

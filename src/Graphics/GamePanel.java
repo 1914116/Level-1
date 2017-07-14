@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font startFont;
 	Font instructions;
 	Rocketship ship;
+	ObjectManager manager;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -28,7 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		startFont = new Font("Arial", Font.PLAIN, 24);
 		instructions = new Font("Arial", Font.PLAIN, 24);
-		ship = new Rocketship(225, 700, 50, 50, 10);
+		ship = new Rocketship(225, 700, 50, 50, 15);
+		manager = new ObjectManager();
+		manager.addObject(ship);
 	}
 
 	public void startGame() {
@@ -40,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-
+		manager.update();
 	}
 
 	public void updateEndState() {
@@ -56,13 +59,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(startFont);
 		g.drawString("Press ENTER to Start", 125, 300);
 		g.setFont(instructions);
-		g.drawString("Press SPACE for instructions", 85, 400);
+		g.drawString("Press TAB for instructions", 85, 400);
 	}
 
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 800);
-		ship.draw(g);
+		manager.draw(g);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -105,13 +108,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyTyped");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyEvent");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == MENU_STATE) {
 				currentState = GAME_STATE;
@@ -124,12 +125,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				currentState = MENU_STATE;
 			}
 		}
+		if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			JOptionPane.showMessageDialog(null, "Use arrow keys to move. Press SPACE to fire. Try not to die by avoiding the aliens.");
+		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			JOptionPane.showMessageDialog(null,
-					"Use arrow keys to move. Press SPACE to fire. Try not to die by avoiding the aliens.");
+			manager.addObject(new Projectile(250, 700, 10, 10, 10));
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Z) {
+			manager.addObject(new Projectile(0, 800, 800, 10, 10));
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			ship.up();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			ship.down();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			ship.right();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			ship.left();
 		}
 	}
 
