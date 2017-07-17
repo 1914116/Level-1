@@ -19,6 +19,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font instructions;
 	Rocketship ship;
 	ObjectManager manager;
+	int intscore;
+	String yourscore;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -29,7 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		startFont = new Font("Arial", Font.PLAIN, 24);
 		instructions = new Font("Arial", Font.PLAIN, 24);
-		ship = new Rocketship(225, 700, 50, 50, 15);
+		ship = new Rocketship(225, 700, 50, 50, 5);
 		manager = new ObjectManager();
 		manager.addObject(ship);
 	}
@@ -44,6 +46,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		manager.update();
+		manager.checkCollision();
+		if(ship.isAlive==false){
+			currentState= END_STATE;
+		}
+		intscore = manager.getScore();
+		yourscore = Integer.toString(intscore);
 	}
 
 	public void updateEndState() {
@@ -66,6 +74,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 500, 800);
 		manager.draw(g);
+		manager.manageEnemies();
+		g.setFont(instructions);
+		g.drawString(yourscore, 450, 50);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -75,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.drawString("GAME OVER", 100, 100);
 		g.setFont(startFont);
-		g.drawString("That was pitiful. You only killed " + " aliens.", 30, 300);
+		g.drawString("That was pitiful. You only killed " + yourscore + " aliens.", 30, 300);
 		g.setFont(instructions);
 		g.drawString("Press BACKSPACE to Restart.", 70, 500);
 	}
@@ -129,29 +140,40 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			JOptionPane.showMessageDialog(null, "Use arrow keys to move. Press SPACE to fire. Try not to die by avoiding the aliens.");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			manager.addObject(new Projectile(250, 700, 10, 10, 10));
+			manager.addObject(new Projectile(ship.x + 25, ship.y, 10, 10, 10));
 		}
-		if (e.getKeyCode() == KeyEvent.VK_Z) {
-			manager.addObject(new Projectile(0, 800, 800, 10, 10));
+		if(e.getKeyCode() == KeyEvent.VK_9){
+			manager.addObject(new Projectile(ship.x+25, ship.y, 150, 100, 25));
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			ship.up();
+			ship.up=true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			ship.down();
+			ship.down=true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			ship.right();
+			ship.right=true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			ship.left();
+			ship.left=true;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyReleased");
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			ship.up=false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			ship.down=false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			ship.right=false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			ship.left=false;
+		}
 	}
 
 }
