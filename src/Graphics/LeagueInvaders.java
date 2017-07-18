@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class LeagueInvaders {
 	JFrame game = new JFrame();
 	static final int WIDTH = 500;
-	static final int height = 800;
+	static final int HEIGHT = 800;
 	GamePanel gamePanel = new GamePanel();
 
 	public LeagueInvaders() {
@@ -21,7 +21,7 @@ public class LeagueInvaders {
 		game.add(gamePanel);
 		game.setVisible(true);
 		game.addKeyListener(gamePanel);
-		game.setSize(WIDTH, height);
+		game.setSize(WIDTH, HEIGHT);
 		game.setTitle("League Invaders");
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gamePanel.startGame();

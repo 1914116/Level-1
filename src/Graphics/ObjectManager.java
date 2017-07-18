@@ -1,13 +1,14 @@
 package Graphics;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObjectManager {
+public class ObjectManager  {
 	ArrayList<GameObject> objects;
 
 	private int score = 0;
-
+	Alien alien2;
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
 	public ObjectManager() {
@@ -33,7 +34,7 @@ public class ObjectManager {
 			o.draw(g);
 		}
 		if(score>=150){
-			g.fillRect(250, 200, 75, 75);
+			
 		}
 	}
 
@@ -46,10 +47,16 @@ public class ObjectManager {
 	}
 
 	 public void manageEnemies(){
-		 if(score>=125){
+		 if(score==25){
 			 addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 75, 75, 1));
 		 }
-		 
+		 if(score>=175 && score<=200){
+			 addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 100, 100, 1)); 
+		 }
+		 if(score==250){
+			 alien2 = new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 150, 150, 1);
+			 addObject(alien2);
+		 }
 		 if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
 	 addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50, 2));
 	 enemyTimer = System.currentTimeMillis();
@@ -68,7 +75,7 @@ public class ObjectManager {
 	 score++;
 	 System.out.println(score);
 	 o1.isAlive = false;
-	 o2.isAlive = true;
+	 o2.isAlive = false;
 	 }
 	 else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
 	 (o2 instanceof Alien && o1 instanceof Rocketship)){
