@@ -50,10 +50,10 @@ public class ObjectManager  {
 		 if(score==25){
 			 addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 75, 75, 1));
 		 }
-		 if(score>=175 && score<=200){
+		 if(score>=15 && score<=200){
 			 addObject(new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 100, 100, 1)); 
 		 }
-		 if(score==250){
+		 if(score>=250){
 			 alien2 = new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0, 150, 150, 1);
 			 addObject(alien2);
 		 }

@@ -197,6 +197,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_2) {
 			manager.addObject(new Projectile(ship.x + 25, ship.y, pw, ph, 10));
 			manager.addObject(new Projectile(ship.x - 25, ship.y, pw, ph, 10));
+			manager.addObject(new Projectile(ship.x-=25, ship.y, pw, ph, 25));
+			manager.addObject(new Projectile(ship.x+=25, ship.y, pw, ph, 25));
+			manager.addObject(new Projectile(ship.x + 25, ship.y, pw, ph, 15));
+			manager.addObject(new Projectile(ship.x - 25, ship.y, pw, ph, 15));
+			manager.addObject(new Projectile(ship.x-=25, ship.y, pw, ph, 20));
+			manager.addObject(new Projectile(ship.x+=25, ship.y, pw, ph, 20));
+			manager.addObject(new Projectile(ship.x + 25, ship.y, pw, ph, 30));
+			manager.addObject(new Projectile(ship.x - 25, ship.y, pw, ph, 30));
+			manager.addObject(new Projectile(ship.x-=25, ship.y, pw, ph, 5));
+			manager.addObject(new Projectile(ship.x+=25, ship.y, pw, ph, 5));
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 			manager.addObject(new Projectile(ship.x - 25, ship.y, pw, ph, 10));
