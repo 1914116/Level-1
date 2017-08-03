@@ -14,11 +14,11 @@ public class GameObject {
 
 	public GameObject() {
 		isAlive = true;
-		collisionBox = new Rectangle(x,y,width, height);
+		collisionBox = new Rectangle(x, y, width, height);
 	}
 
 	public void update() {
-		collisionBox.setBounds(x, y, width, height);
+
 	}
 
 	public void draw(Graphics g) {
