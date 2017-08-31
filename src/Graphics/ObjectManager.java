@@ -75,11 +75,11 @@ public class ObjectManager  {
 	 score++;
 	 System.out.println(score);
 	 o1.isAlive = false;
-	 o2.isAlive = false;
+	 o2.isAlive = true;
 	 }
 	 else if((o1 instanceof Alien && o2 instanceof Rocketship) ||
 	 (o2 instanceof Alien && o1 instanceof Rocketship)){
-	 o1.isAlive = false;
+	 o1.isAlive = true;
 	 o2.isAlive = false;
 	 }	
 	 }
